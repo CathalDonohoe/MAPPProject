@@ -12,6 +12,9 @@ public class PLayerController : MonoBehaviour
     private int desiredLane = 1; // 0:left 1:middle 2:right
     public float laneDistance = 4; //distance between  2 lanes
 
+    public float jumpForce;
+    public float gravity = -20;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -21,6 +24,18 @@ public class PLayerController : MonoBehaviour
     void Update()
     {
         direction.z = forwardSpeed;
+        
+        if (controller.isGrounded){
+            direction.y = -1;
+            if(Input.GetKeyDown(KeyCode.UpArrow)){
+            Jump();
+            }
+        }else{
+            direction.y += gravity*Time.deltaTime;
+
+        }
+
+        
 
         //gather input on which lane we should be in
 
@@ -53,5 +68,9 @@ public class PLayerController : MonoBehaviour
 
     private void FixedUpdate(){
         controller.Move(direction*Time.fixedDeltaTime);
+    }
+
+    private void Jump(){
+        direction.y = jumpForce;
     }
 }
