@@ -10,7 +10,7 @@ public class PLayerController : MonoBehaviour
     public float forwardSpeed;
 
     private int desiredLane = 1; // 0:left 1:middle 2:right
-    public float laneDistance = 4; //distance between  2 lanes
+    public float laneDistance = 2; //distance between  2 lanes
 
     public float jumpForce;
     public float gravity = -20;
