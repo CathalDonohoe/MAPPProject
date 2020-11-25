@@ -15,19 +15,38 @@ public class PLayerController : MonoBehaviour
     public float jumpForce;
     public float gravity = -20;
 
+    public int score;
+    public float wasSpeed= 0 ;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
     }
 
+    public void Homework(){
+        score += 5;
+    }
+
+    void ResearchPaper(){
+
+    }
+
+    void Coffee(){
+
+    }
+    
+
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log(score);
+
         direction.z = forwardSpeed;
         
         if (controller.isGrounded){
             direction.y = -1;
-            if(Input.GetKeyDown(KeyCode.UpArrow)){
+            if(Input.GetKeyDown(KeyCode.Space)){
             Jump();
             }
         }else{
