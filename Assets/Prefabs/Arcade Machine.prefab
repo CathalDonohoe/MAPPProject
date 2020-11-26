@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 8693648613634844080}
   m_Layer: 0
   m_Name: Arcade Machine
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

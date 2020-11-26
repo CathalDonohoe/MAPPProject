@@ -7,6 +7,7 @@ TagManager:
   - Coffee
   - Homework
   - Research paper
+  - Obstacle
   layers:
   - Default
   - TransparentFX

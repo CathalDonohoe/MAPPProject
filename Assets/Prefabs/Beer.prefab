@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 6598225704465568233}
   m_Layer: 0
   m_Name: Beer
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9160065752192444379}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3abfc7198c85ce649bd21dd41e50b870, type: 3}
   m_Name: 
@@ -266,8 +266,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.101997614, y: 0.1429751, z: 0.14857168}
-  m_Center: {x: 0.00036735833, y: 0.009049339, z: -0.015688816}
+  m_Size: {x: 0.101997614, y: 0.19171143, z: 0.19781494}
+  m_Center: {x: 0.00036735833, y: 0.009216309, z: -0.014892578}
 --- !u!1 &9160067315183053177
 GameObject:
   m_ObjectHideFlags: 0

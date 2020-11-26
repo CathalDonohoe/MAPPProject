@@ -23,19 +23,6 @@ public class PLayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
-    public void Homework(){
-        score += 5;
-    }
-
-    void ResearchPaper(){
-
-    }
-
-    void Coffee(){
-
-    }
-    
-
     // Update is called once per frame
     void Update()
     {
@@ -83,6 +70,7 @@ public class PLayerController : MonoBehaviour
         }
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, 80*Time.deltaTime);
+        controller.center = controller.center;
     }
 
     private void FixedUpdate(){
@@ -91,5 +79,33 @@ public class PLayerController : MonoBehaviour
 
     private void Jump(){
         direction.y = jumpForce;
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit){
+        if(hit.transform.tag == "Obstacle")
+        {
+            PlayerManager.gameOver = true;
+        }
+
+        if (hit.transform.tag == "Coffee")
+        {
+            wasSpeed = forwardSpeed;
+            forwardSpeed = 25;
+            new WaitForSeconds (5);
+            forwardSpeed = wasSpeed;
+            Destroy(hit.transform.gameObject);
+        }
+
+        if (hit.transform.tag == "Homework")
+        {
+            score +=5;
+            Destroy(hit.transform.gameObject);
+        }
+
+        if (hit.transform.tag == "Research Paper")
+        {
+            score += 25;
+            Destroy(hit.transform.gameObject);
+        }
     }
 }
