@@ -16,7 +16,8 @@ public class PLayerController : MonoBehaviour
     public float gravity = -20;
 
     public int score;
-    public float wasSpeed= 0 ;
+    public float wasSpeed;
+
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class PLayerController : MonoBehaviour
     {
 
         Debug.Log(score);
+        Debug.Log(forwardSpeed);
 
         direction.z = forwardSpeed;
         
@@ -81,6 +83,15 @@ public class PLayerController : MonoBehaviour
         direction.y = jumpForce;
     }
 
+    IEnumerator Wait()
+    {
+        wasSpeed = forwardSpeed;
+        forwardSpeed = 10f;
+        yield return new WaitForSeconds(10);
+        forwardSpeed = wasSpeed;
+
+    }
+
     private void OnControllerColliderHit(ControllerColliderHit hit){
         if(hit.transform.tag == "Obstacle")
         {
@@ -89,10 +100,8 @@ public class PLayerController : MonoBehaviour
 
         if (hit.transform.tag == "Coffee")
         {
-            wasSpeed = forwardSpeed;
-            forwardSpeed = 25;
-            new WaitForSeconds (5);
-            forwardSpeed = wasSpeed;
+            
+            StartCoroutine(Wait()); 
             Destroy(hit.transform.gameObject);
         }
 
@@ -102,7 +111,7 @@ public class PLayerController : MonoBehaviour
             Destroy(hit.transform.gameObject);
         }
 
-        if (hit.transform.tag == "Research Paper")
+        if (hit.transform.tag == "Research paper")
         {
             score += 25;
             Destroy(hit.transform.gameObject);

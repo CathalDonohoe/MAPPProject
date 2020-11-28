@@ -198,7 +198,6 @@ GameObject:
   - component: {fileID: 8975963423045942160}
   - component: {fileID: 8987663956592541086}
   - component: {fileID: 8259139278677698807}
-  - component: {fileID: 3116802936214351205}
   m_Layer: 0
   m_Name: Research Paper
   m_TagString: Research paper
@@ -280,17 +279,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.26814452, y: 0.026740784, z: 0.36065376}
-  m_Center: {x: -0.119753405, y: -5.04871e-29, z: -0.000000014901161}
---- !u!114 &3116802936214351205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9002592857596599594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a42bdb4e951cc54081ca926ec475c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Size: {x: 0.26814452, y: 0.07820126, z: 0.36065376}
+  m_Center: {x: -0.119753405, y: 0.0020692274, z: -0.00000001490116}

@@ -6870,7 +6870,6 @@ GameObject:
   - component: {fileID: 781540586788122387}
   - component: {fileID: 8828180479726889653}
   - component: {fileID: 3280442874816032062}
-  - component: {fileID: 3220453954332947533}
   m_Layer: 0
   m_Name: Cappuccino
   m_TagString: Coffee
@@ -6947,24 +6946,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7016094601308295349}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.22303268, y: 0.10259807, z: 0.18010558}
   m_Center: {x: 0.023629073, y: 0.051299036, z: 0}
---- !u!114 &3220453954332947533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7016094601308295349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23e18f291211b3345873a3066b2e2ff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wasSpeed: 0
 --- !u!1 &7371730005852520545
 GameObject:
   m_ObjectHideFlags: 0
@@ -17697,15 +17683,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 910c6c08c70b65d42a9eb77f772273d4, type: 3}
---- !u!4 &6021847772988165712 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1580304313623910445, guid: 910c6c08c70b65d42a9eb77f772273d4,
-    type: 3}
-  m_PrefabInstance: {fileID: 5079982050123830909}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6023937170041770060 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1578206223589787185, guid: 910c6c08c70b65d42a9eb77f772273d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 5079982050123830909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6021847772988165712 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1580304313623910445, guid: 910c6c08c70b65d42a9eb77f772273d4,
     type: 3}
   m_PrefabInstance: {fileID: 5079982050123830909}
   m_PrefabAsset: {fileID: 0}

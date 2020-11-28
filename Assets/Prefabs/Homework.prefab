@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1555368552629059717}
   - component: {fileID: 1563357537131443919}
   - component: {fileID: 4474939273337616501}
-  - component: {fileID: 4263471559041095238}
   m_Layer: 0
   m_Name: Homework
   m_TagString: Homework
@@ -95,15 +94,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.11727597, y: 0.4640398, z: 0.295798}
   m_Center: {x: -0.006669633, y: 0.22739667, z: 0.015538223}
---- !u!114 &4263471559041095238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578206223589787185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6f9e23df71d61443a35c4cc5a1480ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
