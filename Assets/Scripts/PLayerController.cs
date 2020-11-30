@@ -28,6 +28,7 @@ public class PLayerController : MonoBehaviour
     void Update()
     {
 
+        CheckScore();
         Debug.Log(score);
         Debug.Log(forwardSpeed);
 
@@ -75,6 +76,21 @@ public class PLayerController : MonoBehaviour
         controller.center = controller.center;
     }
 
+    private void CheckScore(){
+        if(ScoreScript.scoreValue >=700){
+            forwardSpeed = 4.5f;
+
+            if (ScoreScript.scoreValue >= 1800){
+                forwardSpeed = 6f;
+
+                if (ScoreScript.scoreValue >= 2400){
+                    forwardSpeed = 8f;
+                }
+            }
+        }
+
+    }
+
     private void FixedUpdate(){
         controller.Move(direction*Time.fixedDeltaTime);
     }
@@ -87,7 +103,7 @@ public class PLayerController : MonoBehaviour
     {
         wasSpeed = forwardSpeed;
         forwardSpeed = 10f;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
         forwardSpeed = wasSpeed;
 
     }
@@ -107,13 +123,13 @@ public class PLayerController : MonoBehaviour
 
         if (hit.transform.tag == "Homework")
         {
-            score +=5;
+            ScoreScript.scoreValue +=5;
             Destroy(hit.transform.gameObject);
         }
 
         if (hit.transform.tag == "Research paper")
         {
-            score += 25;
+            ScoreScript.scoreValue += 25;
             Destroy(hit.transform.gameObject);
         }
     }
