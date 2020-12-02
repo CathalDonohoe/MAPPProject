@@ -15,7 +15,6 @@ public class PLayerController : MonoBehaviour
     public float jumpForce;
     public float gravity = -20;
 
-    public int score;
     public float wasSpeed;
 
     public bool onCoffee = false;
@@ -34,7 +33,6 @@ public class PLayerController : MonoBehaviour
         }
 
         CheckScore();
-        Debug.Log(score);
         Debug.Log(forwardSpeed);
 
         direction.z = forwardSpeed;
@@ -97,14 +95,26 @@ public class PLayerController : MonoBehaviour
     }
 
     private void CheckScore(){
-        if(ScoreScript.scoreValue >=20){
-            forwardSpeed = 4.5f;
+        if(ScoreScript.scoreValue >=700){
+            forwardSpeed = 6.5f;
 
-            if (ScoreScript.scoreValue >= 30){
-                forwardSpeed = 6f;
+            if(onCoffee == true){
+                StartCoroutine(Wait()); 
+            }
 
-                if (ScoreScript.scoreValue >= 40){
-                    forwardSpeed = 8f;
+            if (ScoreScript.scoreValue >= 1800){
+                forwardSpeed = 8f;
+
+                if(onCoffee == true){
+                StartCoroutine(Wait()); 
+                }
+
+                if (ScoreScript.scoreValue >= 2400){
+                    forwardSpeed = 10f;
+
+                    if(onCoffee == true){
+                        StartCoroutine(Wait()); 
+                    }
                 }
             }
         }
@@ -125,9 +135,8 @@ public class PLayerController : MonoBehaviour
 
     IEnumerator Wait()
     {
-        onCoffee = true;
         wasSpeed = forwardSpeed;
-        forwardSpeed = 10f;
+        forwardSpeed += 5f;
         yield return new WaitForSeconds(5);
         forwardSpeed = wasSpeed;
         onCoffee = false;
@@ -143,6 +152,7 @@ public class PLayerController : MonoBehaviour
         if (hit.transform.tag == "Coffee")
         {
             if(onCoffee == false){
+                onCoffee = true;
                 StartCoroutine(Wait()); 
                 Destroy(hit.transform.gameObject);
             }

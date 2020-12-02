@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Events : MonoBehaviour
 {
     public void ReplayGame(){
+        ScoreScript.scoreValue = 0;
         SceneManager.LoadScene("Level");
     }
 

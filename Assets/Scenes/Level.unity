@@ -1062,11 +1062,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4842c92b3a60e5248a79fafd9c1a22c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 3.5
+  forwardSpeed: 5
   laneDistance: 1.5
   jumpForce: 12
   gravity: -20
-  score: 0
   wasSpeed: 0
   onCoffee: 0
 --- !u!143 &835691831
