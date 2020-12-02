@@ -18,15 +18,20 @@ public class PLayerController : MonoBehaviour
     public int score;
     public float wasSpeed;
 
+    public bool onCoffee = false;
+
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+
+        if(!PlayerManager.isGameStarted){
+            return;
+        }
 
         CheckScore();
         Debug.Log(score);
@@ -38,6 +43,9 @@ public class PLayerController : MonoBehaviour
             direction.y = -1;
             if(Input.GetKeyDown(KeyCode.Space)){
             Jump();
+            }
+            if(SwipeManager.swipeUp){
+                Jump();
             }
         }else{
             direction.y += gravity*Time.deltaTime;
@@ -54,8 +62,20 @@ public class PLayerController : MonoBehaviour
                 desiredLane = 2;
             }
         }
+        if(SwipeManager.swipeRight){
+            desiredLane++;
+            if(desiredLane==3){
+                desiredLane = 2;
+            }
+        }
 
         if(Input.GetKeyDown(KeyCode.LeftArrow)){
+            desiredLane--;
+            if(desiredLane==-1){
+                desiredLane = 0;
+            }
+        }
+        if(SwipeManager.swipeLeft){
             desiredLane--;
             if(desiredLane==-1){
                 desiredLane = 0;
@@ -77,13 +97,13 @@ public class PLayerController : MonoBehaviour
     }
 
     private void CheckScore(){
-        if(ScoreScript.scoreValue >=700){
+        if(ScoreScript.scoreValue >=20){
             forwardSpeed = 4.5f;
 
-            if (ScoreScript.scoreValue >= 1800){
+            if (ScoreScript.scoreValue >= 30){
                 forwardSpeed = 6f;
 
-                if (ScoreScript.scoreValue >= 2400){
+                if (ScoreScript.scoreValue >= 40){
                     forwardSpeed = 8f;
                 }
             }
@@ -92,6 +112,10 @@ public class PLayerController : MonoBehaviour
     }
 
     private void FixedUpdate(){
+
+        if(!PlayerManager.isGameStarted){
+            return;
+        }
         controller.Move(direction*Time.fixedDeltaTime);
     }
 
@@ -101,10 +125,12 @@ public class PLayerController : MonoBehaviour
 
     IEnumerator Wait()
     {
+        onCoffee = true;
         wasSpeed = forwardSpeed;
         forwardSpeed = 10f;
         yield return new WaitForSeconds(5);
         forwardSpeed = wasSpeed;
+        onCoffee = false;
 
     }
 
@@ -116,9 +142,14 @@ public class PLayerController : MonoBehaviour
 
         if (hit.transform.tag == "Coffee")
         {
-            
-            StartCoroutine(Wait()); 
-            Destroy(hit.transform.gameObject);
+            if(onCoffee == false){
+                StartCoroutine(Wait()); 
+                Destroy(hit.transform.gameObject);
+            }
+
+            else{
+                Destroy(hit.transform.gameObject);
+            }
         }
 
         if (hit.transform.tag == "Homework")
