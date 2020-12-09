@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class MenuScript : MonoBehaviour
 {
     public void PlayGame(){
-        FindObjectOfType<AudioManager>().Playsound("Play");
+        //FindObjectOfType<AudioManager>().Playsound("Play");
         SceneManager.LoadScene("Level");
     }
 
     public void QuitGame(){
-        FindObjectOfType<AudioManager>().Playsound("Quit");
+        //FindObjectOfType<AudioManager>().Playsound("Quit");
         Application.Quit();
     }
 }

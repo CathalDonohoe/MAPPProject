@@ -19,21 +19,23 @@ public class PLayerController : MonoBehaviour
 
     public bool onCoffee = false;
 
+    public static bool isDead = false;
+    private Animator anim;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
     }
-
+    
     void Update()
-    {
-
+    {        
         if(!PlayerManager.isGameStarted){
             return;
         }
 
         CheckScore();
-        Debug.Log(forwardSpeed);
+        //Debug.Log(forwardSpeed);
 
         direction.z = forwardSpeed;
         
@@ -98,21 +100,21 @@ public class PLayerController : MonoBehaviour
             forwardSpeed = 6.5f;
 
             if(onCoffee == true){
-                StartCoroutine(Wait()); 
+                StartCoroutine(Speed()); 
             }
 
             if (ScoreScript.scoreValue >= 1800){
                 forwardSpeed = 8f;
 
                 if(onCoffee == true){
-                StartCoroutine(Wait()); 
+                StartCoroutine(Speed()); 
                 }
 
                 if (ScoreScript.scoreValue >= 2400){
                     forwardSpeed = 10f;
 
                     if(onCoffee == true){
-                        StartCoroutine(Wait()); 
+                        StartCoroutine(Speed()); 
                     }
                 }
             }
@@ -132,7 +134,7 @@ public class PLayerController : MonoBehaviour
         direction.y = jumpForce;
     }
 
-    IEnumerator Wait()
+    IEnumerator Speed()
     {
         wasSpeed = forwardSpeed;
         forwardSpeed += 5f;
@@ -141,21 +143,25 @@ public class PLayerController : MonoBehaviour
         onCoffee = false;
 
     }
+    IEnumerator Dead()
+    {
+        anim.SetBool("IsDead", true);
+        yield return new  WaitForSeconds(2);
+    }
 
     private void OnControllerColliderHit(ControllerColliderHit hit){
         if(hit.transform.tag == "Obstacle")
         {
-            FindObjectOfType<AudioManager>().Playsound("Game Over");
-            FindObjectOfType<AudioManager>().Stopsound("Main Theme");
+            StartCoroutine(Dead()); 
             PlayerManager.gameOver = true;
         }
 
         if (hit.transform.tag == "Coffee")
         {
-            FindObjectOfType<AudioManager>().Playsound("Coffee");
+            //FindObjectOfType<AudioManager>().Playsound("Coffee");
             if(onCoffee == false){
                 onCoffee = true;
-                StartCoroutine(Wait()); 
+                StartCoroutine(Speed()); 
                 Destroy(hit.transform.gameObject);
             }
 
@@ -166,14 +172,14 @@ public class PLayerController : MonoBehaviour
 
         if (hit.transform.tag == "Homework")
         {
-            FindObjectOfType<AudioManager>().Playsound("Homework");
+            //FindObjectOfType<AudioManager>().Playsound("Homework");
             ScoreScript.scoreValue +=5;
             Destroy(hit.transform.gameObject);
         }
 
         if (hit.transform.tag == "Research paper")
         {
-            FindObjectOfType<AudioManager>().Playsound("Research Paper");
+            //FindObjectOfType<AudioManager>().Playsound("Research Paper");
             ScoreScript.scoreValue += 25;
             Destroy(hit.transform.gameObject);
         }

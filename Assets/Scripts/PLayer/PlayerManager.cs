@@ -33,4 +33,5 @@ public class PlayerManager : MonoBehaviour
             Destroy(startingText);
         }
     }
+
 }
