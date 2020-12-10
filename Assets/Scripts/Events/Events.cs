@@ -8,6 +8,7 @@ public class Events : MonoBehaviour
     public void ReplayGame(){
         //FindObjectOfType<AudioManager>().Playsound("Replay");
         ScoreScript.scoreValue = 0;
+        PLayerController.forwardSpeed = 5f;
         SceneManager.LoadScene("Level");
     }
 

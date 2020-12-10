@@ -7,7 +7,7 @@ public class PLayerController : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 direction;
-    public float forwardSpeed;
+    public static float forwardSpeed;
 
     private int desiredLane = 1; // 0:left 1:middle 2:right
     public float laneDistance = 1.7f; //distance between  2 lanes
@@ -18,6 +18,7 @@ public class PLayerController : MonoBehaviour
     public float wasSpeed;
 
     public bool onCoffee = false;
+    public bool isSliding = false;
 
     public static bool isDead = false;
     private Animator anim;
@@ -26,6 +27,7 @@ public class PLayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        forwardSpeed = 5f;
     }
     
     void Update()
@@ -79,6 +81,17 @@ public class PLayerController : MonoBehaviour
             if(desiredLane==-1){
                 desiredLane = 0;
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.DownArrow)){
+            if(isSliding==false){
+                StartCoroutine(Slide());
+            }
+            else{
+                return;
+            }
+            
+
         }
 
 
@@ -143,22 +156,55 @@ public class PLayerController : MonoBehaviour
         onCoffee = false;
 
     }
+    IEnumerator Slide()
+    {
+        anim.SetBool("Slide", true);
+        controller.center = new Vector3(0,0.5f,0);
+        controller.height = 0.01f;
+        controller.radius = 0.1f;
+        isSliding=true;
+        yield return new WaitForSeconds(1);
+        anim.SetBool("Slide", false);
+        controller.center = new Vector3(0,0.85f,0);
+        controller.height = 2;
+        controller.radius = 0.3f;
+        isSliding=false;
+
+    }
+
+    //failure at animation
     IEnumerator Dead()
     {
-        anim.SetBool("IsDead", true);
-        yield return new  WaitForSeconds(2);
+        anim.SetTrigger("NowDead");
+        direction.y -=6.5f;
+        yield return new WaitForSeconds(2);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit){
         if(hit.transform.tag == "Obstacle")
         {
+            FindObjectOfType<AudioManager>().Play("PlayerDeath");
+            forwardSpeed = 0f;
             StartCoroutine(Dead()); 
             PlayerManager.gameOver = true;
+        }
+        if(hit.transform.tag == "Table")
+        {
+            if(isSliding == true){
+                Debug.Log("Slide");
+                return;
+            }
+            else{
+                forwardSpeed = 0f;
+            StartCoroutine(Dead()); 
+            PlayerManager.gameOver = true;
+            }
+            
         }
 
         if (hit.transform.tag == "Coffee")
         {
-            //FindObjectOfType<AudioManager>().Playsound("Coffee");
+            FindObjectOfType<AudioManager>().Play("Coffee");
             if(onCoffee == false){
                 onCoffee = true;
                 StartCoroutine(Speed()); 
@@ -172,14 +218,14 @@ public class PLayerController : MonoBehaviour
 
         if (hit.transform.tag == "Homework")
         {
-            //FindObjectOfType<AudioManager>().Playsound("Homework");
+            FindObjectOfType<AudioManager>().Play("Homework");
             ScoreScript.scoreValue +=5;
             Destroy(hit.transform.gameObject);
         }
 
         if (hit.transform.tag == "Research paper")
         {
-            //FindObjectOfType<AudioManager>().Playsound("Research Paper");
+            FindObjectOfType<AudioManager>().Play("Research Paper");
             ScoreScript.scoreValue += 25;
             Destroy(hit.transform.gameObject);
         }
