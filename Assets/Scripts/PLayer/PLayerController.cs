@@ -23,11 +23,23 @@ public class PLayerController : MonoBehaviour
     public static bool isDead = false;
     private Animator anim;
 
+    public GameObject Level2UI;
+    public GameObject Level3UI;
+    public GameObject FLevelUI;
+    
+    public bool inlevel2;
+    public bool inlevel3;
+    public bool inFinalLevel;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         forwardSpeed = 5f;
+        inlevel2 = true;
+        inlevel3 = true;
+        inFinalLevel = true;
+
     }
     
     void Update()
@@ -110,6 +122,9 @@ public class PLayerController : MonoBehaviour
 
     private void CheckScore(){
         if(ScoreScript.scoreValue >=700){
+            
+            StartCoroutine(Level2());
+            inlevel2 = false;
             forwardSpeed = 6.5f;
 
             if(onCoffee == true){
@@ -117,6 +132,9 @@ public class PLayerController : MonoBehaviour
             }
 
             if (ScoreScript.scoreValue >= 1800){
+               
+                StartCoroutine(Level3());
+                inlevel3 = false;
                 forwardSpeed = 8f;
 
                 if(onCoffee == true){
@@ -124,6 +142,9 @@ public class PLayerController : MonoBehaviour
                 }
 
                 if (ScoreScript.scoreValue >= 2400){
+                    
+                    StartCoroutine(FLevel());
+                    inFinalLevel = false;
                     forwardSpeed = 10f;
 
                     if(onCoffee == true){
@@ -147,6 +168,46 @@ public class PLayerController : MonoBehaviour
         direction.y = jumpForce;
     }
 
+    IEnumerator Level2()
+    {
+        if(inlevel2 == true)
+        {
+            FindObjectOfType<AudioManager>().Stop("Theme");
+            FindObjectOfType<AudioManager>().Play("Level2");
+            Level2UI.SetActive(true);
+            yield return new WaitForSeconds(1);
+            Level2UI.SetActive(false);
+        }
+        
+
+    }
+
+    IEnumerator Level3()
+    {
+        if(inlevel3 == true)
+        {
+            FindObjectOfType<AudioManager>().Stop("Level2");
+            FindObjectOfType<AudioManager>().Play("Level3");
+            Level3UI.SetActive(true);
+            yield return new WaitForSeconds(1);
+            Level3UI.SetActive(false);
+        }
+        
+    }
+
+    IEnumerator FLevel()
+    {
+        if(inFinalLevel == true)
+        {
+            FindObjectOfType<AudioManager>().Stop("Level3");
+            FindObjectOfType<AudioManager>().Play("FLevel");
+            FLevelUI.SetActive(true);
+            yield return new WaitForSeconds(1);
+            FLevelUI.SetActive(false);
+        }
+
+    }
+
     IEnumerator Speed()
     {
         wasSpeed = forwardSpeed;
@@ -158,12 +219,13 @@ public class PLayerController : MonoBehaviour
     }
     IEnumerator Slide()
     {
+        isSliding=true;
         anim.SetBool("Slide", true);
         controller.center = new Vector3(0,0.5f,0);
         controller.height = 0.01f;
         controller.radius = 0.1f;
-        isSliding=true;
-        yield return new WaitForSeconds(1);
+        
+        yield return new WaitForSeconds(0.7f);
         anim.SetBool("Slide", false);
         controller.center = new Vector3(0,0.85f,0);
         controller.height = 2;
@@ -195,9 +257,10 @@ public class PLayerController : MonoBehaviour
                 return;
             }
             else{
+                FindObjectOfType<AudioManager>().Play("PlayerDeath");
                 forwardSpeed = 0f;
-            StartCoroutine(Dead()); 
-            PlayerManager.gameOver = true;
+                StartCoroutine(Dead()); 
+                PlayerManager.gameOver = true;
             }
             
         }
