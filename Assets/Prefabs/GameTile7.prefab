@@ -16814,7 +16814,7 @@ GameObject:
   - component: {fileID: 1948591454359469771}
   m_Layer: 0
   m_Name: Training table
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18253,7 +18253,7 @@ GameObject:
   - component: {fileID: 7214789476338812639}
   m_Layer: 0
   m_Name: Training table (1)
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

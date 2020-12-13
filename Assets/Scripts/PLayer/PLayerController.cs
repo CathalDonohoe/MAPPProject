@@ -39,6 +39,7 @@ public class PLayerController : MonoBehaviour
         inlevel2 = true;
         inlevel3 = true;
         inFinalLevel = true;
+        isSliding = false;
 
     }
     
