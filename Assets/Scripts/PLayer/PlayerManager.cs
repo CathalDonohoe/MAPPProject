@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject startingText;
 
 
-    // Start is called before the first frame update
+    //plays game
     void Start()
     {
         gameOver = false;
@@ -19,15 +19,17 @@ public class PlayerManager : MonoBehaviour
         isGameStarted = false;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
+        //shows game over screen
         if (gameOver)
         {
             //Time.timeScale = 0;
             gameOverPanel.SetActive(true);
         }
 
+        //if the player taps the screen starts game
         if(SwipeManager.tap){
             isGameStarted = true;
             Destroy(startingText);

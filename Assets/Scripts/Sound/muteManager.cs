@@ -11,7 +11,8 @@ public class muteManager : MonoBehaviour
     void Start(){
         isMuted = false;
     }
-
+    
+    //mutes all audio for game via button
     public void MutePressed(){
         isMuted = !isMuted;
         AudioListener.pause = isMuted;

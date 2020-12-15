@@ -5,6 +5,7 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
+   //creates array of Sounds
    public Sound[] sounds;
 
    public static AudioManager instance;
@@ -20,6 +21,7 @@ public class AudioManager : MonoBehaviour
        } 
        DontDestroyOnLoad(gameObject);
 
+        //instantiates the list of sounds for the array
        foreach(Sound s in sounds)
        {
            s.source = gameObject.AddComponent<AudioSource>();
@@ -31,11 +33,13 @@ public class AudioManager : MonoBehaviour
 
        }
    }
-
+    
+    //plays the default theme on start up
    void Start(){
-       Play("Theme");
+       //Play("Theme");
    }
 
+    //function to cycle through the array for a name match and then plays the sound
    public void Play (string name)
    {
        Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -47,6 +51,7 @@ public class AudioManager : MonoBehaviour
        s.source.Play();
    }
 
+    //function to cycle through the array for a name match and then stops the sound
    public void Stop (string name)
    {
        Sound s = Array.Find(sounds, sound => sound.name == name);

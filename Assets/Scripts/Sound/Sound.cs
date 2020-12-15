@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 [System.Serializable]
 public class Sound
 {
-
+    //variables to be used by an audiomanager array
     public string name;
 
     public AudioClip clip;

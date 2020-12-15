@@ -7,12 +7,13 @@ public class tutorial : MonoBehaviour
     public GameObject tutUI;
     public GameObject mainUI;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         StartCoroutine(tut());
     }
 
+    //causes the tutorial splash screen to appear to the player on start up
     IEnumerator tut(){
         mainUI.SetActive(false);
         tutUI.SetActive(true);
@@ -21,6 +22,8 @@ public class tutorial : MonoBehaviour
         mainUI.SetActive(true);
     }
 
+    
+    //used for other scripts
     public void tutOn(){
         mainUI.SetActive(false);
         tutUI.SetActive(true);
